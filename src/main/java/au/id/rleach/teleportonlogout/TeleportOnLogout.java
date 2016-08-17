@@ -8,6 +8,7 @@ import org.spongepowered.api.command.CommandMapping;
 import org.spongepowered.api.config.ConfigDir;
 import org.spongepowered.api.entity.living.player.Player;
 import org.spongepowered.api.event.Listener;
+import org.spongepowered.api.event.game.GameReloadEvent;
 import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
@@ -23,20 +24,6 @@ import java.util.Optional;
          description = au.id.rleach.teleportonlogout.Plugin.DESCRIPTION
 )
 public class TeleportOnLogout {
-
-    @Inject
-    @ConfigDir(sharedRoot = true)
-    private Path configDir;
-
-    @Inject
-    private PluginContainer container;
-
-    private CommentedConfigurationNode configNode;
-    private TeleportOnLogoutConfig teleportOnLogoutConfig;
-    private Optional<CommandMapping> clearMapping = Optional.empty();
-    private Optional<CommandMapping> globalClearMapping = Optional.empty();
-    private PermissionService permissionService;
-
     @Listener
     public void teleportOnLogout(final ClientConnectionEvent.Disconnect disconnect) {
         final Player player = disconnect.getTargetEntity();
