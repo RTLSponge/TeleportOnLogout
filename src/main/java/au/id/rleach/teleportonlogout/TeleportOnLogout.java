@@ -13,6 +13,8 @@ import org.spongepowered.api.event.network.ClientConnectionEvent;
 import org.spongepowered.api.plugin.Plugin;
 import org.spongepowered.api.plugin.PluginContainer;
 import org.spongepowered.api.service.permission.PermissionService;
+import org.spongepowered.api.world.Location;
+import org.spongepowered.api.world.World;
 import org.spongepowered.api.world.storage.WorldProperties;
 
 import java.nio.file.Path;
@@ -32,6 +34,7 @@ public class TeleportOnLogout {
         defaultWorldOpt.ifPresent(
                 defaultWorld -> {
                     player.transferToWorld(defaultWorld.getUniqueId(), defaultWorld.getSpawnPosition().toDouble());
+                    player.setLocation(new Location<World>(player.getWorld(), defaultWorld.getSpawnPosition().toDouble().add(.5,0,.5)));
                 }
         );
     }
